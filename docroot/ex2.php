@@ -11,7 +11,13 @@ class lisbonInterviewEx2{
      * @var int
      */
     private $switches = 0;
+    /**
+     * @var int
+     */
     private $index    = 0;
+    /**
+     * @var int
+     */
     private $runOnce  = 0;
 
 
@@ -38,6 +44,13 @@ class lisbonInterviewEx2{
 
     }
 
+    /**
+     * @param $array
+     * @param int $index
+     * @param int $highest
+     * @param int $switchesAllowed
+     * @return mixed
+     */
     private function highestsOnFirst($array, $index = 0, $highest = 0, $switchesAllowed = 5) {
 
         $origArray = $array;
