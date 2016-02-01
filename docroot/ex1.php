@@ -1,10 +1,21 @@
 <?php
 
+/**
+ * Class lisbonInterviewEx1
+ * Created by Renato Biancalana da Silva <renato.biancalana.silva@gmail.com>
+ */
 class lisbonInterviewEx1
 {
 
+    /**
+     * @var array
+     */
     public $finalArray = array();
 
+    /**
+     * @param $matrix
+     * @return string
+     */
     public function callSpiral($matrix) {
 
         $arithmeticalNum = 1;
@@ -25,6 +36,14 @@ class lisbonInterviewEx1
 
     }
 
+    /**
+     * @param $arithmeticalNum
+     * @param $matrix
+     * @param $numRows
+     * @param $centerRow
+     * @param $centerCol
+     * @return mixed
+     */
     private function makeSpiral($arithmeticalNum, $matrix, $numRows, $centerRow, $centerCol) {
 
         if ($arithmeticalNum %2 == 0) {
@@ -64,6 +83,10 @@ class lisbonInterviewEx1
 
     }
 
+    /**
+     * @param $total
+     * @return float
+     */
     private function calculateCenter($total) {
 
         $center = $total/2;

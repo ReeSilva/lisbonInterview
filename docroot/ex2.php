@@ -1,9 +1,23 @@
 <?php
 
+/**
+ * Class lisbonInterviewEx2
+ * Created by Renato Biancalana da Silva <renato.biancalana.silva@gmail.com>
+ */
 class lisbonInterviewEx2{
 
+
+    /**
+     * @var int
+     */
     private $switches = 0;
 
+
+    /**
+     * @param array $numbersArray
+     * @param int $switchesAllowed
+     * @return string
+     */
     public function calculateHighestNumber(array $numbersArray, $switchesAllowed = 5) {
 
         # Coloca o maior número possível em primeiro (ou o maior que pode chegar lá)
@@ -21,6 +35,11 @@ class lisbonInterviewEx2{
 
     }
 
+    /**
+     * @param $array
+     * @param $switches
+     * @return mixed
+     */
     private function highestGoFirst($array, $switches) {
 
         $highestCanChangeKey = $this->highestCanChange($array, $switches, 0);
@@ -34,6 +53,12 @@ class lisbonInterviewEx2{
         return $array;
     }
 
+    /**
+     * @param $array
+     * @param $switches
+     * @param $initialKey
+     * @return mixed
+     */
     private function highestCanChange($array, $switches, $initialKey) {
 
         $origArray = $array;
@@ -50,6 +75,12 @@ class lisbonInterviewEx2{
 
     }
 
+    /**
+     * @param $array
+     * @param $switches
+     * @param $initialKey
+     * @return mixed
+     */
     private function changePosition($array, $switches, $initialKey) {
 
         $origArray = $array;
