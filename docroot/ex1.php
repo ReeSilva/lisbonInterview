@@ -26,6 +26,9 @@ class lisbonInterviewEx1
         $centerCol = $this->calculateCenter($numCols);
         $centerRow = $this->calculateCenter($numRows);
 
+        if ($numRows = 1 && $numCols == 1) {
+            return $matrix[0][0];
+        }
 
         array_push($this->finalArray, $matrix[$centerRow][$centerCol]);
         $this->makeSpiral($arithmeticalNum, $matrix, $numCols, $centerRow, $centerCol);
