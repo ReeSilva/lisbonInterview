@@ -11,6 +11,8 @@ class lisbonInterviewEx2{
      * @var int
      */
     private $switches = 0;
+    private $index    = 0;
+    private $runOnce  = 0;
 
 
     /**
@@ -20,13 +22,14 @@ class lisbonInterviewEx2{
      */
     public function calculateHighestNumber(array $numbersArray, $switchesAllowed = 5) {
 
-        # Coloca o maior número possível em primeiro (ou o maior que pode chegar lá)
-        $numbersArray = $this->highestGoFirst($numbersArray, $switchesAllowed);
+        $highest = 0;
+
         while ($this->switches < $switchesAllowed) {
-
-            $numbersArray = $this->changePosition($numbersArray, $switchesAllowed, 1);
-            $this->switches++;
-
+            $numbersArray = $this->highestsOnFirst($numbersArray, $this->index, $highest, $switchesAllowed);
+            $highest++;
+            if ($highest > count($numbersArray)) {
+                break;
+            }
         }
 
         $result = implode(", ", $numbersArray);
@@ -35,69 +38,32 @@ class lisbonInterviewEx2{
 
     }
 
-    /**
-     * @param $array
-     * @param $switches
-     * @return mixed
-     */
-    private function highestGoFirst($array, $switches) {
-
-        $highestCanChangeKey = $this->highestCanChange($array, $switches, 0);
-
-        $this->switches = $highestCanChangeKey;
-
-        $highest = $array[$highestCanChangeKey];
-        unset($array[$highestCanChangeKey]);
-        array_unshift($array, $highest);
-
-        return $array;
-    }
-
-    /**
-     * @param $array
-     * @param $switches
-     * @param $initialKey
-     * @return mixed
-     */
-    private function highestCanChange($array, $switches, $initialKey) {
+    private function highestsOnFirst($array, $index = 0, $highest = 0, $switchesAllowed = 5) {
 
         $origArray = $array;
         sort($array);
-        $array = array_reverse($array);
+        $arrayDesc = array_reverse($array);
 
-        $highestKey = array_search($array[$initialKey], $origArray);
+        $highestKeys = array_keys($origArray, $arrayDesc[$highest]);
 
-        if ($highestKey > $switches) {
-            return $this->highestCanChange($origArray, $switches, $initialKey+1);
+        if (count($highestKeys) > 1 && $this->runOnce) {
+            $highestKey = 1;
+        } else {
+            $highestKey = 0;
         }
 
-        return $highestKey;
+        if ($highestKeys[$highestKey] - $index <= $switchesAllowed - $this->switches) {
+            for ($i = $highestKeys[$highestKey]; $i > $index; $i--) {
+                $higherNumber = $origArray[$i];
 
-    }
+                $origArray[$i] = $origArray[$i-1];
+                $origArray[$i-1] = $higherNumber;
 
-    /**
-     * @param $array
-     * @param $switches
-     * @param $initialKey
-     * @return mixed
-     */
-    private function changePosition($array, $switches, $initialKey) {
-
-        $origArray = $array;
-        sort($array);
-        $array = array_reverse($array);
-
-        $highestKey = array_search($array[$initialKey], $origArray);
-
-        if ($highestKey - 1 > $switches - $this->switches) {
-            return $this->changePosition($origArray, $switches, $initialKey+1);
+                $this->switches++;
+            }
+            $this->index++;
         }
-
-        $oldNumber = $origArray[1];
-
-        $origArray[1] = $origArray[$highestKey];
-        $origArray[$highestKey] = $oldNumber;
-
+        $this->runOnce = 1;
         return $origArray;
 
     }
@@ -106,6 +72,6 @@ class lisbonInterviewEx2{
 
 $lisbonInterview = new lisbonInterviewEx2;
 
-$result = $lisbonInterview->calculateHighestNumber(array(2,5,7,1,8));
+$result = $lisbonInterview->calculateHighestNumber(array(5,3,3,3,6,2,9));
 
 echo $result;
