@@ -85,6 +85,6 @@ class lisbonInterviewEx2{
 
 $lisbonInterview = new lisbonInterviewEx2;
 
-$result = $lisbonInterview->calculateHighestNumber(array(5,3,3,3,6,2,9));
+$result = $lisbonInterview->calculateHighestNumber(array(2,5,7,1,8));
 
 echo $result;
