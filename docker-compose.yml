@@ -1,0 +1,8 @@
+web:
+  image: php:5.6-apache
+  volumes:
+    - ./docroot:/var/www/html:rw
+  ports:
+    - "8080:80"
+  environment:
+    XDEBUG_CONFIG: remote_host={{192.168.0.53}}
